@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .container {
+        display: flex;
+        height: 100vh;
+        background: orange;
+      }
+      .item {
+        background: darkred;
+        color: white;
+      }
+      /* Direção do container */
+      .direction {
+        /* Em linha */
+        flex-direction: row;
+        /* Em linha de trás pra frente */
+        flex-direction: row-reverse;
+        /* Em coluna */
+        flex-direction: column;
+        /* Em coluna de trás pra frente */
+        flex-direction: column-reverse;
+      }
+      /* Quebra de linha */
+      .broken-line {
+        /* Sem quebra de linha */
+        flex-wrap: nowrap;
+        /* Quebra linha */
+        flex-wrap: wrap;
+        /* Quebra de linha de trás pra frente */
+        flex-wrap: wrap-reverse;
+      }
+      /* Alinhamento (horizontal) */
+      .justify {
+        justify-content: flex-end;
+        /* Alinha no fim. */
+        justify-content: flex-start;
+        /* Alinha no começo. */
+        justify-content: center;
+        /* Espaços entre os itens, colado na borda. */
+        justify-content: space-between;
+        /* Espaços envolta dos itens. */
+        justify-content: space-around;
+      }
+
+      /* Alinhamento dos itens */
+      .align {
+        /* Valor padrão, ele que faz com que os flex itens cresçam igualmente. */
+        align-items: stretch;
+        /* Alinha os itens ao início. */
+        align-items: flex-start;
+        /* Alinha os itens ao final. */
+        align-items: flex-end;
+        /* Alinha os itens ao centro. */
+        align-items: center;
+        /* Alinha os itens de acordo com a linha base da tipografia. */
+        align-items: baseline;
+      }
+
+    /* Alinhamento do container */
+    .align-content {
+      /* Valor padrão, ele que faz com que os flex itens cresçam igualmente. */
+      align-content: stretch;
+      /* Alinha os itens ao início. */
+      align-content: flex-start;
+      /* Alinha os itens ao final. */
+      align-content: flex-end;
+      /* Alinha os itens ao centro. */
+      align-content: center;
+      /* Espaço entre os itens. */
+      align-content:  space-between;
+      /* Espaço em volta. */
+      align-content:  space-around;
+    }
+    /* Espaço dos itens */
+    .item.grow {
+      flex-grow: 1; /* 100% */
+      flex-grow: 0; /* 0% */
+    }
+    /* Indica o tamanho inicial do flex item antes da distribuição do espaço restante */
+    .item.basis {
+      flex-basis: auto;
+      flex-basis: 30vh;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container direction broken-line justify align align-content">
+      <div class="item grow basis">item 1</div>
+      <div class="item grow basis">item 2</div>
+      <div class="item grow basis">item 3</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mensagens</title>
+
+    <!-- https://www.flaticon.com/free-icon/love_1029183#term=message&page=1&position=16
+    -->
+    <style>
+        /* Color Theme Swatches in Hex */
+        .Coral-fashion-bag-on-contrast-background-1-hex { color: #65BFBF; }
+        .Coral-fashion-bag-on-contrast-background-2-hex { color: #91D9D9; }
+        .Coral-fashion-bag-on-contrast-background-3-hex { color: #F27457; }
+        .Coral-fashion-bag-on-contrast-background-4-hex { color: #F26457; }
+        .Coral-fashion-bag-on-contrast-background-5-hex { color: #0D0D0D; }
+
+        body {
+            background-color: #65BFBF;
+            font-family: sans-serif;
+        }
+        .content {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+        .icone {
+            width: 80px;
+            margin: 20px 0;
+        }
+        .formulario {
+            background-color: #f5f5f5;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        .formulario input {
+            width: 100%;
+            border: 2px solid #91D9D9;
+            border-radius: 10px;
+            padding: 10px 15px;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 20px;
+        }
+        .formulario .button-enviar {
+            border: none;
+            background-color: #F26457;
+            color: #fff;
+            padding: 16px 15px;
+            position: relative;
+            float: right;
+            top: -47px;
+            border-radius: 0 10px 10px 0;
+            outline: none;
+            cursor: pointer;
+        }
+        .mensagens {
+            margin-top: 15px;
+        }
+        .mensagem {
+            margin-bottom: 10px;
+            background-color: #f5f5f5;
+            color: #0D0D0D;
+            border-radius: 10px;
+            padding: 5px 10px;
+            border-bottom: 3px solid #F27457;
+            text-align: left;
+        }
+        #template {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <img class="icone" src="./love.png" alt="coração">
+        <div class="formulario">
+            <input id="input-mensagem" type="text" placeholder="Digite sua mensagem" />
+            <button class="button-enviar" onclick="adicionarMensagem()">enviar</button>
+        </div>
+        <div id="mensagens" class="mensagens">
+            <div id="template" class="mensagem">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem unde modi nostrum qui maiores dolorem facere deleniti nihil blanditiis labore ipsum possimus dolore in, officia laudantium itaque tempora ad eligendi.</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function adicionarMensagem() {
+        const template = document.getElementById("template");
+        const mensagens = document.getElementById("mensagens");
+        const inputMensagem = document.getElementById("input-mensagem");
+        if (inputMensagem) {
+            const novaMensagem = template.cloneNode();
+            novaMensagem.id = '';
+            novaMensagem.style.display = 'block';
+            novaMensagem.innerText = inputMensagem.value;
+            mensagens.appendChild(novaMensagem);
+            inputMensagem.value = '';
+        }
+    }
+</script>
+</html>

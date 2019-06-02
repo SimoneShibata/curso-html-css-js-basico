@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Cálculo de IMC</title>
+		<style>
+      * {
+        font-family: sans-serif;
+      }
+			body {
+        margin: 0;
+				display: flex;
+				justify-content: center;
+        background-color: #FCE9CC;
+        align-items: center;
+        min-height: 100vh;
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+        min-width: 30vw;
+        max-height: 50vh;
+        background: #FFA08B;
+        padding: 20px;
+        border-radius: 15px;
+			}
+      h1 {
+        color: #123638;
+        align-self: center;
+      }
+      label {
+        font-size: 12px;
+        color: #123638;
+        margin-top: 10px;
+      }
+      label:first-of-type {
+        margin-top: 0;
+      }
+      input {
+        padding: 5px 8px;
+        border-radius: 5px;
+        border: 1px solid #757f7f;
+        outline-color: #FF625E;
+      }
+      button {
+        background-color: #FF625E;
+        color: #fff;
+        border: none;
+        margin-top: 15px;
+        font-size: 15px;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        outline: none;
+      }
+      button:hover {
+        background-color: #e8433f;
+        transition: background-color 2s;
+      }
+      #resultado {
+        font-weight: bold;
+      }
+		</style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cálculo de IMC</h1>
+      <label for="altura">Altura (m)</label>
+      <input id="altura" type="number" name="altura" />
+      <label for="peso">Peso (kg)</label>
+      <input id="peso" type="number" name="peso" />
+			<button onclick="calcularImc()">Calcular</button>
+			
+			<div>
+					<h2></h2>
+					<div>
+						<span id="valor"></span>
+						<p id="resultado"></p>
+					</div>
+				</div>
+    </div>
+  </body>
+  <script>
+    function nivelDoImc(imc) {
+      if (imc < 18.5) {
+        return "Abaixo do peso";
+      }
+      if (imc < 25) {
+        return "Peso normal";
+      }
+      if (imc < 30) {
+        return "Sobrepeso";
+      }
+      if (imc < 35) {
+        return "Obesidade grau 1";
+      }
+      if (imc < 40) {
+        return "Obesidade grau 2";
+      }
+      return "Obesidade grau 3";
+		}
+		
+    function calcularImc() {
+      const altura = document.getElementById("altura").value;
+      const peso = document.getElementById("peso").value;
+      if (altura && peso) {
+        let imc = peso / altura**2;
+        imc = imc.toFixed(2);
+        document.getElementsByTagName('h2').innerText = 'Resultado';
+        document.getElementById("valor").innerText = imc;
+        document.getElementById("resultado").innerText = nivelDoImc(imc);
+      }
+    }
+  </script>
+</html>

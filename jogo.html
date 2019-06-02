@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jogo da velha</title>
+    <style>
+        .velha {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .linha {
+            display: flex;
+            flex-direction: row;
+        }
+        .casa {
+            border: 1px solid gray;
+            padding: 30px;
+            cursor: pointer;
+        }
+        h1 {
+            text-align: center;
+        }
+        button {
+            margin: 0 auto;
+            display: none;
+        }
+    </style>
+
+    <script>
+        let jogadas = {
+            blue: [],
+            red: []
+        };
+        let jogadorAtual = 'blue';
+        let rodada = 0;
+        let fimDeJogo = false;
+
+        function limparJogo() {
+            jogadas = {
+                blue: [],
+                red: []
+            };
+            jogadorAtual = 'blue';
+            rodada = 0;
+            document.getElementById('mensagem').innerText = `Vez de ${jogadorAtual}`;
+            fimDeJogo = false;
+
+            const casas = document.getElementsByClassName('casa');
+            for (var i = 0; i < casas.length; i++) {
+                casas[i].style.backgroundColor = "white";
+                casas[i].style.cursor = 'pointer';
+            }
+            return;
+        }
+
+        function arrayContainsItemsArray(array1, array2) {
+            return array2.every(casa => array1.includes(casa));
+        }
+
+        function verificarFimDeJogo() {
+            const casasOrdenadas = jogadas[jogadorAtual].sort();
+            
+            if (arrayContainsItemsArray(casasOrdenadas, [1,2,3]) || arrayContainsItemsArray(casasOrdenadas, [4,5,6])  || arrayContainsItemsArray(casasOrdenadas, [7,8,9])
+            || arrayContainsItemsArray(casasOrdenadas, [1,4,7])  || arrayContainsItemsArray(casasOrdenadas, [2,5,8])  || arrayContainsItemsArray(casasOrdenadas, [3,6,9])
+            || arrayContainsItemsArray(casasOrdenadas, [1,5,9])  || arrayContainsItemsArray(casasOrdenadas, [3,5,7])) {
+                document.getElementById('mensagem').innerText = `Parabéns, Jogador ${jogadorAtual}! Você venceu!`;
+                document.getElementById('jogarDeNovo').style.display = 'block';
+                fimDeJogo = true;
+                return;
+            } else if (rodada === 9) {
+                document.getElementById('mensagem').innerText = 'EMPATE';
+                document.getElementById('jogarDeNovo').style.display = 'block';
+                fimDeJogo = true;
+                return;
+            } 
+            jogadorAtual = jogadorAtual === 'blue' ? 'red' : 'blue'; 
+            document.getElementById('mensagem').innerText = `Vez de ${jogadorAtual}`;
+        }
+        
+        function marcarCasa(casa) {
+            if (!jogadas['blue'].includes(casa) && !jogadas['red'].includes(casa) && !fimDeJogo) {
+                rodada++;
+                jogadas[jogadorAtual].push(casa);
+                document.getElementById(`casa${casa}`).style.backgroundColor = jogadorAtual;
+                document.getElementById(`casa${casa}`).style.cursor = 'context-menu';
+                verificarFimDeJogo();
+            }
+        } 
+    </script>
+</head>
+<body>
+    <div class="velha">
+        <div class="linha">
+            <div id="casa1" class="casa" onclick="marcarCasa(1)"></div>
+            <div id="casa2" class="casa" onclick="marcarCasa(2)"></div>
+            <div id="casa3" class="casa" onclick="marcarCasa(3)"></div>
+        </div>
+        <div class="linha">
+            <div id="casa4" class="casa" onclick="marcarCasa(4)"></div>
+            <div id="casa5" class="casa" onclick="marcarCasa(5)"></div>
+            <div id="casa6" class="casa" onclick="marcarCasa(6)"></div>
+        </div>
+        <div class="linha">
+            <div id="casa7" class="casa" onclick="marcarCasa(7)"></div>
+            <div id="casa8" class="casa" onclick="marcarCasa(8)"></div>
+            <div id="casa9" class="casa" onclick="marcarCasa(9)"></div>
+        </div>
+    </div>
+    <div class="center">
+        <h1 id="mensagem"></h1>
+        <button id="jogarDeNovo" onclick="limparJogo()">Jogar de novo</button>
+    </div>
+</body>
+</html>
